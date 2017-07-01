@@ -9,17 +9,16 @@ public class ListaTextos {
         String texto = "The ability to write good code differentiates good developers from the rest";
         List<String> textoDividido = dividirTexto(texto, 3);
 
-        for (int i = 0; i < textoDividido.size(); i++) {
-            System.out.println("\"" + textoDividido.get(i) + "\"");
+        for (String textos : textoDividido) {
+            System.out.println("\"" + textos + "\"");
         }
 
     }
 
     static List<String> dividirTexto (String texto, int lineas) {
 
-        int textoLength = texto.length();
         String[] partes = texto.split(" ");
-        int longitudFrase = textoLength / lineas;
+        int longitudFrase = texto.length() / lineas;
         int in = 0;
 
         List<String> lista = new ArrayList<>();
@@ -30,7 +29,7 @@ public class ListaTextos {
 
             while (frase.length() < longitudFrase && in < partes.length) {
 
-                frase = frase + partes[in] + " ";
+                frase += partes[in] + " ";
                 in++;
             }
 
