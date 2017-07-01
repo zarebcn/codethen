@@ -10,7 +10,7 @@ public class ListaTextos {
         List<String> textoDividido = dividirTexto(texto, 3);
 
         for (int i = 0; i < textoDividido.size(); i++) {
-            System.out.println(textoDividido.get(i));
+            System.out.println("\"" + textoDividido.get(i) + "\"");
         }
 
     }
@@ -23,22 +23,20 @@ public class ListaTextos {
 
         int i = 0;
         int in = 0;
-        String frase = "";
-        String espacio = " ";
 
         List<String> lista = new ArrayList<>();
 
         while (i < lineas) {
 
-            while (frase.length() < longitudFrase) {
+            String frase = "";
+            while (frase.length() < longitudFrase && in < partes.length) {
 
-                frase = frase + partes[in];
-                frase = frase + espacio;
+                frase = frase + partes[in] + " ";
                 in++;
             }
 
+            frase = frase.substring(0, frase.length() - 1);
             lista.add(frase);
-            frase = "";
             i++;
         }
 
