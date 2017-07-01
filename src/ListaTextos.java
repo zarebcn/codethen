@@ -19,16 +19,15 @@ public class ListaTextos {
 
         int textoLength = texto.length();
         String[] partes = texto.split(" ");
-        int longitudFrase = (textoLength - (lineas - 1))/lineas;
-
-        int i = 0;
+        int longitudFrase = textoLength / lineas;
         int in = 0;
 
         List<String> lista = new ArrayList<>();
 
-        while (i < lineas) {
+        for (int i = 0; i < lineas; i++) {
 
             String frase = "";
+
             while (frase.length() < longitudFrase && in < partes.length) {
 
                 frase = frase + partes[in] + " ";
@@ -37,7 +36,6 @@ public class ListaTextos {
 
             frase = frase.substring(0, frase.length() - 1);
             lista.add(frase);
-            i++;
         }
 
         return lista;
