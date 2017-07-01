@@ -18,23 +18,29 @@ public class ListaTextos {
     static List<String> dividirTexto (String texto, int lineas) {
 
         String[] partes = texto.split(" ");
-        int longitudFrase = texto.length() / lineas;
-        int in = 0;
+        int longitudFrase = (texto.length() - (lineas - 1)) / lineas;
+        int i = 0;
+        String frase = "";
 
         List<String> lista = new ArrayList<>();
 
-        for (int i = 0; i < lineas; i++) {
+        for (int in = 0; i < lineas; in++) {
 
-            String frase = "";
+            frase += partes[in] + " ";
 
-            while (frase.length() < longitudFrase && in < partes.length) {
+            if (frase.length() > longitudFrase || in == partes.length - 1) {
 
-                frase += partes[in] + " ";
-                in++;
+                frase = frase.substring(0, frase.length() - 1);
+                lista.add(frase);
+                frase = "";
+                i++;
+
+                if ( partes[in] == partes[partes.length - 1]) {
+
+                    i = lineas;
+                    //break;
+                }
             }
-
-            frase = frase.substring(0, frase.length() - 1);
-            lista.add(frase);
         }
 
         return lista;
