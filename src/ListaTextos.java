@@ -13,6 +13,12 @@ public class ListaTextos {
             System.out.println("\"" + textos + "\"");
         }
 
+        List<String> textoDividido2 = dividirTexto2(texto, 5);
+
+        for (String textos : textoDividido2) {
+            System.out.println("\"" + textos + "\"");
+        }
+
     }
 
     static List<String> dividirTexto (String texto, int lineas) {
@@ -40,6 +46,103 @@ public class ListaTextos {
                     i = lineas;
                     //break;
                 }
+            }
+        }
+
+        return lista;
+    }
+
+    static List<String> dividirTexto2 (String texto, int lineas) {
+
+        String[] partes = texto.split(" ");
+
+        //value of 0.5
+        String value = "[fijlt]";
+
+        //value of 1
+        String value1 = "[^fijltmwA-Z]";
+
+        //value of 1.5
+        String value2 = "[mwA-LN-VX-Z]";
+
+        //value of 2
+        String value3 = "[MW]";
+
+        double total = 0;
+        int j = 0;
+
+        //Este bucle calcula la longitud total del texto midiendo cada palabra por su valor headline
+        for (int i = 0; i < partes.length; i++) {
+
+            double longitudPalabra = 0;
+
+            for (int in = 0; in < partes[j].length(); in++) {
+
+                String a = partes[j].substring(in, 1 + in);
+
+                if (a.matches(value)) {
+
+                    longitudPalabra += 0.5;
+                }
+
+                if (a.matches(value1)) {
+
+                    longitudPalabra += 1;
+                }
+
+                if (a.matches(value2)) {
+
+                    longitudPalabra += 1.5;
+                }
+
+            }
+
+            total += longitudPalabra + 1;
+            j++;
+        }
+
+        total = total - 1;
+        double longitudLinea = total / lineas;
+        double longitudLineaActual = 0;
+        List<String> lista = new ArrayList<>();
+        int i = 0;
+        String frase = "";
+
+        for (int in = 0; i < lineas; in++) {
+
+            double longitudPalabra = 0;
+
+            for (int e = 0; e < partes[in].length(); e++) {
+
+                String a = partes[in].substring(e, 1 + e);
+
+                if (a.matches(value)) {
+
+                    longitudPalabra += 0.5;
+                }
+
+                if (a.matches(value1)) {
+
+                    longitudPalabra += 1;
+                }
+
+                if (a.matches(value2)) {
+
+                    longitudPalabra += 1.5;
+                }
+
+            }
+
+            frase += partes[in] + " ";
+            longitudLineaActual += longitudPalabra + 1;
+
+            if (longitudLineaActual + 3 > longitudLinea || in == partes.length - 1) {
+
+                frase = frase.substring(0, frase.length()-1);
+                lista.add(frase);
+                frase = "";
+                longitudLineaActual = 0;
+                i++;
             }
         }
 
