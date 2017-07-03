@@ -79,22 +79,7 @@ public class ListaTextos {
             for (int in = 0; in < partes[j].length(); in++) {
 
                 String a = partes[j].substring(in, 1 + in);
-
-                if (a.matches(value)) {
-
-                    longitudPalabra += 0.5;
-                }
-
-                if (a.matches(value1)) {
-
-                    longitudPalabra += 1;
-                }
-
-                if (a.matches(value2)) {
-
-                    longitudPalabra += 1.5;
-                }
-
+                longitudPalabra = longitudPalabra(a, value, value1, value2, longitudPalabra);
             }
 
             total += longitudPalabra + 1;
@@ -115,22 +100,7 @@ public class ListaTextos {
             for (int e = 0; e < partes[in].length(); e++) {
 
                 String a = partes[in].substring(e, 1 + e);
-
-                if (a.matches(value)) {
-
-                    longitudPalabra += 0.5;
-                }
-
-                if (a.matches(value1)) {
-
-                    longitudPalabra += 1;
-                }
-
-                if (a.matches(value2)) {
-
-                    longitudPalabra += 1.5;
-                }
-
+                longitudPalabra = longitudPalabra(a, value, value1, value2, longitudPalabra);
             }
 
             frase += partes[in] + " ";
@@ -147,5 +117,25 @@ public class ListaTextos {
         }
 
         return lista;
+    }
+
+    static double longitudPalabra (String a, String value, String value1, String value2, double longitudPalabra) {
+
+        if (a.matches(value)) {
+
+            longitudPalabra += 0.5;
+        }
+
+        if (a.matches(value1)) {
+
+            longitudPalabra += 1;
+        }
+
+        if (a.matches(value2)) {
+
+            longitudPalabra += 1.5;
+        }
+
+        return longitudPalabra;
     }
 }
