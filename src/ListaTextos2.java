@@ -106,26 +106,8 @@ public class ListaTextos2 {
             return lista;
         }
 
-        double total = 0;
-        int j = 0;
-
-        //Este bucle calcula la longitud total del texto midiendo cada palabra por su valor headline
-        for (int i = 0; i < partes.length; i++) {
-
-            double longitudPalabra = 0;
-
-            for (int in = 0; in < partes[j].length(); in++) {
-
-                String a = partes[j].substring(in, 1 + in);
-                longitudPalabra = longitudPalabra(a, value, value1, value2, longitudPalabra);
-            }
-
-            total += longitudPalabra + 1;
-            j++;
-        }
-
-        total = total - 1;
-        double longitudLinea = total / lineas;
+        double longitudTexto = longitudTexto(partes, value, value1, value2, value3);
+        double longitudLinea = longitudTexto / lineas;
         double longitudLineaActual = 0;
         int i = 0;
         String frase = "";
@@ -137,7 +119,7 @@ public class ListaTextos2 {
             for (int e = 0; in <= partes.length - 1 && e < partes[in].length(); e++) {
 
                 String a = partes[in].substring(e, 1 + e);
-                longitudPalabra = longitudPalabra(a, value, value1, value2, longitudPalabra);
+                longitudPalabra = longitudPalabra(a, value, value1, value2, value3, longitudPalabra);
             }
 
             if ((longitudLineaActual + longitudPalabra) > longitudLinea && i == lineas - 1) {
@@ -188,7 +170,7 @@ public class ListaTextos2 {
 
 
 
-    static double longitudPalabra (String a, String value, String value1, String value2, double longitudPalabra) {
+    static double longitudPalabra (String a, String value, String value1, String value2, String value3, double longitudPalabra) {
 
 
         if (a.matches(value)) {
@@ -206,6 +188,34 @@ public class ListaTextos2 {
             longitudPalabra += 1.5;
         }
 
+        if (a.matches(value3)) {
+
+            longitudPalabra += 2;
+        }
+
         return longitudPalabra;
+    }
+
+    static double longitudTexto (String[] partes, String value, String value1, String value2, String value3) {
+
+
+        int j = 0;
+        double total = 0;
+
+        for (int i = 0; i < partes.length; i++) {
+
+            double longitudPalabra = 0;
+
+            for (int in = 0; in < partes[j].length(); in++) {
+
+                String a = partes[j].substring(in, 1 + in);
+                longitudPalabra = longitudPalabra(a, value, value1, value2, value3, longitudPalabra);
+            }
+
+            total += longitudPalabra + 1;
+            j++;
+        }
+
+        return total - 1;
     }
 }
