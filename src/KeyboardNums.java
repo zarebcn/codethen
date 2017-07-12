@@ -98,12 +98,12 @@ public class KeyboardNums {
 
         if ((numeros2.length % 2) == 0) {
 
-            mediana = (numeros2[(numeros2.length / 2)] + numeros2[(numeros2.length / 2) + 1]) / 2;
+            mediana = (numeros2[(numeros2.length / 2)] + numeros2[(numeros2.length / 2) - 1]) / 2;
         }
 
         if ((numeros2.length % 2) != 0) {
 
-            mediana = numeros2[(int)((numeros2.length / 2) + 0.5)];
+            mediana = numeros2[(int)(numeros2.length / 2)];
         }
 
         return mediana;
