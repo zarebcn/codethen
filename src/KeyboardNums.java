@@ -10,7 +10,7 @@ public class KeyboardNums {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        List<String> numeros = new ArrayList<>();
+        List<Double> numeros = new ArrayList<>();
         DecimalFormatSymbols punto = new DecimalFormatSymbols();
         punto.setDecimalSeparator('.');
         DecimalFormat formato = new DecimalFormat("#.00", punto);
@@ -21,7 +21,7 @@ public class KeyboardNums {
 
         while (!input.equals("exit")) {
 
-            numeros.add(input);
+            numeros.add(Double.parseDouble(input));
             System.out.println("Introduce un número o escribe 'exit' para salir: ");
             input = scanner.next();
         }
@@ -38,13 +38,13 @@ public class KeyboardNums {
 
     }
 
-    static double mayor (List<String> numeros) {
+    static double mayor (List<Double> numeros) {
 
-        double mayor = Double.parseDouble(numeros.get(0));
+        double mayor = numeros.get(0);
 
         for (int i = 0; i < numeros.size(); i++) {
 
-            double num = Double.parseDouble(numeros.get(i));
+            double num = numeros.get(i);
 
             if (num > mayor) {
 
@@ -55,13 +55,13 @@ public class KeyboardNums {
         return mayor;
     }
 
-    static double menor (List<String> numeros) {
+    static double menor (List<Double> numeros) {
 
-        double menor = Double.parseDouble(numeros.get(0));
+        double menor = numeros.get(0);
 
         for (int i = 0; i < numeros.size(); i++) {
 
-            double num = Double.parseDouble(numeros.get(i));
+            double num = numeros.get(i);
 
             if (num < menor) {
 
@@ -72,26 +72,26 @@ public class KeyboardNums {
         return menor;
     }
 
-    static double suma (List<String> numeros) {
+    static double suma (List<Double> numeros) {
 
         double suma = 0;
 
         for (int i = 0; i < numeros.size(); i++) {
 
-            suma += Double.parseDouble(numeros.get(i));
+            suma += numeros.get(i);
         }
 
         return suma;
     }
 
-    static double mediana (List<String> numeros) {
+    static double mediana (List<Double> numeros) {
 
         double[] numeros2 = new double[numeros.size()];
         double mediana = 0;
 
         for (int i = 0; i < numeros.size(); i++) {
 
-            numeros2[i] = Double.parseDouble(numeros.get(i));
+            numeros2[i] = numeros.get(i);
         }
 
         Arrays.sort(numeros2);
