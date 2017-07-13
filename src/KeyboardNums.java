@@ -23,12 +23,13 @@ public class KeyboardNums {
             input = scanner.next();
         }
 
+        scanner.close();
+
         if (numeros.size() == 0) {
             return;
         }
 
-        System.out.println("El número mayor es: " + mayor(numeros));
-        System.out.println("El número menor es: " + menor(numeros));
+        mayorMenor(numeros);
         System.out.println("La suma de los números es: " + suma(numeros));
         System.out.println("La media aritmética es: " + formato.format(suma(numeros)/numeros.size()));
         System.out.println("La mediana es: " + mediana(numeros));
@@ -36,9 +37,10 @@ public class KeyboardNums {
 
     }
 
-    static double mayor (List<Double> numeros) {
+    static void mayorMenor (List<Double> numeros) {
 
         double mayor = numeros.get(0);
+        double menor = numeros.get(0);
 
         for (int i = 0; i < numeros.size(); i++) {
 
@@ -48,18 +50,6 @@ public class KeyboardNums {
 
                 mayor = num;
             }
-        }
-
-        return mayor;
-    }
-
-    static double menor (List<Double> numeros) {
-
-        double menor = numeros.get(0);
-
-        for (int i = 0; i < numeros.size(); i++) {
-
-            double num = numeros.get(i);
 
             if (num < menor) {
 
@@ -67,7 +57,8 @@ public class KeyboardNums {
             }
         }
 
-        return menor;
+        System.out.println("El número mayor es: " + mayor);
+        System.out.println("El número menor es: " + menor);
     }
 
     static double suma (List<Double> numeros) {
@@ -97,9 +88,8 @@ public class KeyboardNums {
         if ((numeros2.length % 2) == 0) {
 
             mediana = (numeros2[(numeros2.length / 2)] + numeros2[(numeros2.length / 2) - 1]) / 2;
-        }
 
-        if ((numeros2.length % 2) != 0) {
+        } else {
 
             mediana = numeros2[(int)(numeros2.length / 2)];
         }
