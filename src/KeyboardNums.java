@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -35,6 +32,7 @@ public class KeyboardNums {
         System.out.println("La suma de los números es: " + suma(numeros));
         System.out.println("La media aritmética es: " + formato.format(suma(numeros)/numeros.size()));
         System.out.println("La mediana es: " + mediana(numeros));
+        moda(numeros);
 
     }
 
@@ -107,5 +105,43 @@ public class KeyboardNums {
         }
 
         return mediana;
+    }
+
+    static void moda (List<Double> numeros) {
+
+        Collections.sort(numeros);
+        int repeticionModa = 0;
+        double moda = 0;
+
+        for (int i = 0; i < numeros.size(); i++) {
+
+            double modaActual = numeros.get(i);
+            int repeticionModaActual = 1;
+
+            for (int j = i + 1; j < numeros.size(); j++) {
+
+                if (modaActual == numeros.get(j)) {
+
+                    repeticionModaActual++;
+                }
+            }
+
+            if (repeticionModaActual > repeticionModa) {
+
+                moda = modaActual;
+                repeticionModa = repeticionModaActual;
+
+            } else if (repeticionModaActual == repeticionModa && repeticionModa > 1) {
+
+                moda = Math.min(moda, modaActual);
+
+            } else if (repeticionModa == 1) {
+
+                System.out.println("Moda: No hay números que se repitan");
+                return;
+            }
+        }
+
+        System.out.println("La moda es: " + moda);
     }
 }
