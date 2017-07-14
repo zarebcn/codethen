@@ -101,12 +101,13 @@ public class KeyboardNums {
         return mediana;
     }
 
-    static String moda (List<Double> numeros) {
+    static Moda moda (List<Double> numeros) {
 
         Collections.sort(numeros);
         int repeticionModa = 0;
         double moda = 0;
-        String resultado = "";
+        boolean error = false;
+        Moda resultado = new Moda(moda, error);
 
         for (int i = 0; i < numeros.size(); i++) {
 
@@ -125,16 +126,16 @@ public class KeyboardNums {
 
                 moda = modaActual;
                 repeticionModa = repeticionModaActual;
-                resultado = "" + moda;
+                resultado.moda = moda;
 
             } else if (repeticionModaActual == repeticionModa && repeticionModa > 1) {
 
                 moda = Math.min(moda, modaActual);
-                resultado = "" + moda;
+                resultado.moda = moda;
 
             } else if (repeticionModa == 1) {
 
-                resultado = "No hay números que se repitan";
+                resultado.error = true;
             }
         }
 
@@ -151,5 +152,32 @@ class MayorMenor {
 
         this.mayor = mayor;
         this.menor = menor;
+    }
+}
+
+class Moda {
+
+    double moda;
+    boolean error;
+
+    Moda (double moda, boolean error) {
+
+        this.moda = moda;
+        this.error = error;
+    }
+
+   public String toString() {
+
+        String resultado = "";
+
+        if (!this.error) {
+
+            resultado = "" + this.moda;
+        } else {
+
+            resultado = "No hay números repetidos";
+        }
+
+        return resultado;
     }
 }
