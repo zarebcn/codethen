@@ -29,18 +29,21 @@ public class KeyboardNums {
             return;
         }
 
-        mayorMenor(numeros);
+        MayorMenor mayorMenor = mayorMenor(numeros);
+        System.out.println("El número mayor es: " + mayorMenor.mayor);
+        System.out.println("El número menor es: " + mayorMenor.menor);
         System.out.println("La suma de los números es: " + suma(numeros));
         System.out.println("La media aritmética es: " + formato.format(suma(numeros)/numeros.size()));
         System.out.println("La mediana es: " + mediana(numeros));
-        moda(numeros);
+        System.out.println("La moda es: " + moda(numeros).get(0));
 
     }
 
-    static void mayorMenor (List<Double> numeros) {
+    static MayorMenor mayorMenor (List<Double> numeros) {
 
         double mayor = numeros.get(0);
         double menor = numeros.get(0);
+        MayorMenor mayorMenor = new MayorMenor(mayor, menor);
 
         for (int i = 0; i < numeros.size(); i++) {
 
@@ -57,8 +60,9 @@ public class KeyboardNums {
             }
         }
 
-        System.out.println("El número mayor es: " + mayor);
-        System.out.println("El número menor es: " + menor);
+        mayorMenor.mayor = mayor;
+        mayorMenor.menor = menor;
+        return mayorMenor;
     }
 
     static double suma (List<Double> numeros) {
@@ -97,11 +101,13 @@ public class KeyboardNums {
         return mediana;
     }
 
-    static void moda (List<Double> numeros) {
+    static List<String> moda (List<Double> numeros) {
 
         Collections.sort(numeros);
         int repeticionModa = 0;
         double moda = 0;
+        List<String> resultado = new ArrayList<>();
+        String a = "";
 
         for (int i = 0; i < numeros.size(); i++) {
 
@@ -120,18 +126,32 @@ public class KeyboardNums {
 
                 moda = modaActual;
                 repeticionModa = repeticionModaActual;
+                a = "" + moda;
 
             } else if (repeticionModaActual == repeticionModa && repeticionModa > 1) {
 
                 moda = Math.min(moda, modaActual);
+                a = "" + moda;
 
             } else if (repeticionModa == 1) {
 
-                System.out.println("Moda: No hay números que se repitan");
-                return;
+                a = "No hay números que se repitan";
             }
         }
 
-        System.out.println("La moda es: " + moda);
+        resultado.add(a);
+        return resultado;
+    }
+}
+
+class MayorMenor {
+
+    double mayor;
+    double menor;
+
+    MayorMenor (double mayor, double menor) {
+
+        this.mayor = mayor;
+        this.menor = menor;
     }
 }
