@@ -35,7 +35,7 @@ public class KeyboardNums {
         System.out.println("La suma de los números es: " + suma(numeros));
         System.out.println("La media aritmética es: " + formato.format(suma(numeros)/numeros.size()));
         System.out.println("La mediana es: " + mediana(numeros));
-        System.out.println("La moda es: " + moda(numeros).get(0));
+        System.out.println("La moda es: " + moda(numeros));
 
     }
 
@@ -101,13 +101,12 @@ public class KeyboardNums {
         return mediana;
     }
 
-    static List<String> moda (List<Double> numeros) {
+    static String moda (List<Double> numeros) {
 
         Collections.sort(numeros);
         int repeticionModa = 0;
         double moda = 0;
-        List<String> resultado = new ArrayList<>();
-        String a = "";
+        String resultado = "";
 
         for (int i = 0; i < numeros.size(); i++) {
 
@@ -126,20 +125,19 @@ public class KeyboardNums {
 
                 moda = modaActual;
                 repeticionModa = repeticionModaActual;
-                a = "" + moda;
+                resultado = "" + moda;
 
             } else if (repeticionModaActual == repeticionModa && repeticionModa > 1) {
 
                 moda = Math.min(moda, modaActual);
-                a = "" + moda;
+                resultado = "" + moda;
 
             } else if (repeticionModa == 1) {
 
-                a = "No hay números que se repitan";
+                resultado = "No hay números que se repitan";
             }
         }
 
-        resultado.add(a);
         return resultado;
     }
 }
