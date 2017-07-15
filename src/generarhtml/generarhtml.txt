@@ -1,0 +1,4 @@
+<h1>{{Title}}</h1>
+<p>{{Description}}</p>
+<p>{{Programming language}}</p>
+<p>{{Teacher's name}}</p>
