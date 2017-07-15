@@ -14,9 +14,9 @@ public class GenerarHtml {
     public static void main(String[] args) throws IOException {
 
 
-        FileReader fr = new FileReader("c:/users/amigo/ideaprojects/codethen/src/generarhtml/generarhtml.txt");
+        FileReader fr = new FileReader("src/generarhtml/generarhtml.txt");
         BufferedReader lector = new BufferedReader(fr);
-        PrintWriter escritor = new PrintWriter("c:/users/amigo/ideaprojects/codethen/src/generarhtml/generarhtml.html");
+        PrintWriter escritor = new PrintWriter("src/generarhtml/generarhtml.html");
         Scanner scanner = new Scanner(System.in);
 
 
@@ -42,7 +42,7 @@ public class GenerarHtml {
 
     static List<String> lectorArchivo () throws IOException {
 
-        FileReader fr = new FileReader("c:/users/amigo/ideaprojects/codethen/src/generarhtml/generarhtml.txt");
+        FileReader fr = new FileReader("src/generarhtml/generarhtml.txt");
         BufferedReader lector = new BufferedReader(fr);
         List<String> texto = new ArrayList<>();
         String linea;
