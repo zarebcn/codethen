@@ -14,27 +14,22 @@ public class GenerarHtml {
     public static void main(String[] args) throws IOException {
 
 
-        FileReader fr = new FileReader("src/generarhtml/generarhtml.txt");
-        BufferedReader lector = new BufferedReader(fr);
         PrintWriter escritor = new PrintWriter("src/generarhtml/generarhtml.html");
         Scanner scanner = new Scanner(System.in);
 
-
-        String linea = lector.readLine();
+        List<String> lineas = lectorArchivo();
         System.out.println("Enter the following values");
         String datos;
 
-        for (int i = 0; linea != null; i++) {
+        for (int i = 0; i < lineas.size(); i++) {
 
-            int ind = linea.indexOf("{{");
-            int ind1 = linea.indexOf("}}");
-            System.out.println(getPlaceholder().get(i) + ": ");
+            int ind = lineas.get(i).indexOf("{{");
+            int ind1 = lineas.get(i).indexOf("}}");
+            System.out.println(getPlaceholders().get(i) + ": ");
             datos = scanner.nextLine();
-            escritor.println(linea.substring(0, ind) + datos + linea.substring(ind1 + 2, linea.length()));
-            linea = lector.readLine();
+            escritor.println(lineas.get(i).substring(0, ind) + datos + lineas.get(i).substring(ind1 + 2, lineas.get(i).length()));
         }
 
-        lector.close();
         scanner.close();
         escritor.close();
     }
@@ -57,7 +52,7 @@ public class GenerarHtml {
         return texto;
     }
 
-    static List<String> getPlaceholder () throws IOException {
+    static List<String> getPlaceholders () throws IOException {
 
         List<String> lista = lectorArchivo();
         List<String> placeholders = new ArrayList<>();
