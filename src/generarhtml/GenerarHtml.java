@@ -34,7 +34,10 @@ public class GenerarHtml {
         escritor.close();
     }
 
-
+    /**
+     * lee un archivo de texto llamado 'generarhtml.txt' y guarda el contenido del archivo
+     * en una List<String> y la retorna
+     */
     static List<String> lectorArchivo () throws IOException {
 
         FileReader fr = new FileReader("src/generarhtml/generarhtml.txt");
@@ -52,6 +55,9 @@ public class GenerarHtml {
         return texto;
     }
 
+    /**
+     * separa el placeholder de cada linea, lo mete en una Lista<String> y la retorna
+     */
     static List<String> getPlaceholders () throws IOException {
 
         List<String> lista = lectorArchivo();
