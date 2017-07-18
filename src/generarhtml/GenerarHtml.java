@@ -18,6 +18,7 @@ public class GenerarHtml {
         Scanner scanner = new Scanner(System.in);
 
         List<String> lineas = lectorArchivo();
+        List<String> placeholders = getPlaceholders();
         System.out.println("Enter the following values");
         String datos;
 
@@ -25,7 +26,7 @@ public class GenerarHtml {
 
             int ind = lineas.get(i).indexOf("{{");
             int ind1 = lineas.get(i).indexOf("}}");
-            System.out.println(getPlaceholders().get(i) + ": ");
+            System.out.println(placeholders.get(i) + ": ");
             datos = scanner.nextLine();
             escritor.println(lineas.get(i).substring(0, ind) + datos + lineas.get(i).substring(ind1 + 2, lineas.get(i).length()));
         }
