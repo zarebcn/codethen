@@ -14,30 +14,17 @@ public class GenerarHtml {
     public static void main(String[] args) throws IOException {
 
 
-        PrintWriter escritor = new PrintWriter("src/generarhtml/generarhtml.html");
-        Scanner scanner = new Scanner(System.in);
+        //PrintWriter escritor = new PrintWriter("src/generarhtml/generarhtml.html");
+        //Scanner scanner = new Scanner(System.in);
 
-        List<String> lineas = lectorArchivo();
-        List<String> placeholders = getPlaceholders();
+        List<String> lista = lectorArchivo();
+        List<String> sinCorchetes = quitarCorchetes();
         System.out.println("Enter the following values");
-        String datos;
-
-        for (int i = 0; i < lineas.size(); i++) {
-
-            int ind = lineas.get(i).indexOf("{{");
-            int ind1 = lineas.get(i).indexOf("}}");
-            System.out.println(placeholders.get(i) + ": ");
-            datos = scanner.nextLine();
-            escritor.println(lineas.get(i).substring(0, ind) + datos + lineas.get(i).substring(ind1 + 2, lineas.get(i).length()));
-        }
-
-        scanner.close();
-        escritor.close();
+        generarHtml(lista, sinCorchetes);
     }
 
     /**
-     * lee un archivo de texto llamado 'generarhtml.txt' y guarda el contenido del archivo
-     * en una List<String> y la retorna
+     * lee de un archivo de texto y guarda el contenido en una List<String> y la retorna
      */
     static List<String> lectorArchivo () throws IOException {
 
@@ -57,21 +44,50 @@ public class GenerarHtml {
     }
 
     /**
-     * separa el placeholder de cada linea, lo mete en una Lista<String> y la retorna
+     * sustituye por "#" los corchetes a cada elemento de la lista que crea lectorArchivo
+     * y guarda en una List<String> el contenido con los corchetes sustituidos y la retorna
      */
-    static List<String> getPlaceholders () throws IOException {
+    static List<String> quitarCorchetes () throws IOException {
 
         List<String> lista = lectorArchivo();
-        List<String> placeholders = new ArrayList<>();
-        String placeholder;
+        List<String> sinCorchetes = new ArrayList<>();
 
         for (int i = 0; i < lista.size(); i++) {
-            int ind = lista.get(i).indexOf("{{");
-            int ind1 = lista.get(i).indexOf("}}");
-            placeholder = lista.get(i).substring(ind + 2, ind1);
-            placeholders.add(placeholder);
+
+            String linea = lista.get(i);
+            String a = linea.replace("}}{{", "#");
+            String b = a.replace("}}", "#");
+            String c = b.replace("{{", "#");
+            sinCorchetes.add(c);
         }
 
-        return placeholders;
+        return sinCorchetes;
+    }
+
+    static void generarHtml (List<String> lista, List<String> sinCorchetes) throws IOException  {
+
+        PrintWriter escritor = new PrintWriter("src/generarhtml/generarhtml.html");
+        Scanner scanner = new Scanner(System.in);
+
+        String datos;
+        String html = "";
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            String[] partes = sinCorchetes.get(i).split("#");
+
+            for (int in = 1; in < partes.length - 1; in++) {
+
+                System.out.println(partes[in] + ": ");
+                datos = scanner.nextLine();
+                html += datos + " ";
+            }
+
+            escritor.println(partes[0] + html.substring(0, html.length() - 1) + partes[partes.length - 1]);
+            html = "";
+        }
+
+        scanner.close();
+        escritor.close();
     }
 }
