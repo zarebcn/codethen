@@ -25,8 +25,7 @@ public class DrawRectangle {
             return rectangulo;
         }
 
-        String linea = repeat("*", width);
-        linea = linea + "\n";
+        String linea = repeat("*", width) + "\n";
         rectangulo = repeat(linea, height);
 
         return rectangulo;
