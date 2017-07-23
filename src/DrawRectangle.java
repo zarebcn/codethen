@@ -7,6 +7,7 @@ public class DrawRectangle {
         assertEquals(drawRectangle("*",5,3), "*****\n*****\n*****\n");
         assertEquals(drawRectangle("*",4,2), "****\n****\n");
         assertEquals(drawRectangle("*",6,4), "******\n******\n******\n******\n");
+        assertEquals(drawRectangle("*",1,1), "*\n");
     }
 
 
