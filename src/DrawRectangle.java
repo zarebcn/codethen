@@ -4,9 +4,9 @@ public class DrawRectangle {
 
     public static void main(String[] args) {
 
-        assertEquals(drawRectangle('*',5,3), "*****\n*****\n*****\n");
-        assertEquals(drawRectangle('*',4,2), "****\n****\n");
-        assertEquals(drawRectangle('*',6,4), "******\n******\n******\n******\n");
+        assertEquals(drawRectangle("*",5,3), "*****\n*****\n*****\n");
+        assertEquals(drawRectangle("*",4,2), "****\n****\n");
+        assertEquals(drawRectangle("*",6,4), "******\n******\n******\n******\n");
     }
 
 
@@ -15,32 +15,33 @@ public class DrawRectangle {
      * y retorna un String de una linea de tantos caracteres como el valor de anchura
      * y tantas lineas como el valor de altura
      */
-    static String drawRectangle (char tile, int width, int height) {
+    static String drawRectangle (String tile, int width, int height) {
 
-        String rectangulo = "";
+        String rectangulo;
 
-        if ((width == 1 && height == 1) || width == height) {
+        if (width < 1 || height < 1) {
 
             rectangulo = "Con estos valores no se puede dibujar un rectangulo";
             return rectangulo;
         }
 
-        String linea = "";
-
-        for (int i = 0; i < width; i++) {
-
-            linea += tile;
-        }
-
+        String linea = repeat("*", width);
         linea = linea + "\n";
-
-
-        for (int i = 0; i < height; i++) {
-
-            rectangulo += linea;
-        }
+        rectangulo = repeat(linea, height);
 
         return rectangulo;
+    }
+
+    static String repeat (String datos, int repeticiones) {
+
+        String resultado = "";
+
+        for (int i = 0; i < repeticiones; i++) {
+
+            resultado += datos;
+        }
+
+        return resultado;
     }
 
     /**
