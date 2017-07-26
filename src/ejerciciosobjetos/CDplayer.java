@@ -22,10 +22,6 @@ public class CDplayer {
         if (this.cd != null) {
 
             isIn = true;
-
-        } else {
-
-            isIn = false;
         }
 
         return isIn;
