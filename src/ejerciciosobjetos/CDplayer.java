@@ -10,9 +10,25 @@ public class CDplayer {
         this.cd = null;
     }
 
-    public CD getIsIn() {
+    public CD getCd() {
 
         return this.cd;
+    }
+
+    Boolean getIsIn() {
+
+        Boolean isIn = false;
+
+        if (this.cd != null) {
+
+            isIn = true;
+
+        } else {
+
+            isIn = false;
+        }
+
+        return isIn;
     }
 
     void quitCD() {
