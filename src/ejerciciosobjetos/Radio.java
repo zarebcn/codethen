@@ -1,21 +1,29 @@
 package ejerciciosobjetos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Radio {
 
 
     private String brand;
     private int volume;
     private boolean isOn;
-    private String[] emisoras = {"RAC 1", "Cadena Dial", "Maxima FM", "La Cope", "Radio Marca", "Cadena 100", "Catalunya Radio", "Radio Teletaxi"};
+    private List<String> emisoras = new ArrayList<>();
     private String emisora;
     private int i;
     private CDplayer cdplayer;
 
+
     Radio (CDplayer cdplayer) {
 
+        this.emisoras.add("RAC1");
+        this.emisoras.add("Catalunya Radio");
+        this.emisoras.add("SER");
+        this.emisoras.add("Cope");
         this.volume = 0;
         this.isOn = false;
-        this.emisora = emisoras[0];
+        this.emisora = emisoras.get(0);
         this.i = 0;
         this.cdplayer = cdplayer;
     }
@@ -38,6 +46,11 @@ public class Radio {
     public String getEmisora() {
 
         return emisora;
+    }
+
+    public List<String> getEmisoras() {
+
+        return emisoras;
     }
 
     void turnOn() {
@@ -81,11 +94,11 @@ public class Radio {
 
         if (this.isOn) {
 
-            if (i == emisoras.length) {
+            if (i == emisoras.size()) {
 
                 i = 0;
             }
-            this.emisora = emisoras[i];
+            this.emisora = emisoras.get(i);
         }
     }
 
@@ -97,9 +110,49 @@ public class Radio {
 
             if (i < 0) {
 
-                i = emisoras.length - 1;
+                i = emisoras.size() - 1;
             }
-            this.emisora = emisoras[i];
+            this.emisora = emisoras.get(i);
+        }
+    }
+
+    void selectEmisora(String favorita) {
+
+        int coincide = 0;
+        String emisora = "";
+
+        for (int i = 0; i < this.emisoras.size(); i++) {
+
+            if (favorita.toLowerCase().equals(this.emisoras.get(i).toLowerCase())) {
+
+                coincide++;
+                emisora = this.emisoras.get(i);
+            }
+        }
+
+        if (coincide == 0) {
+
+            System.out.println("Nueva emisora guardada");
+            this.emisoras.add(favorita);
+            this.emisora = favorita;
+
+        } else {
+
+            System.out.println("Emisora ya guardada");
+            this.emisora = emisora;
+        }
+    }
+
+    void removeEmisora(String emisora) {
+
+        for (int i = 0; i < this.emisoras.size(); i++) {
+
+            if (this.emisoras.get(i).toLowerCase().equals(emisora.toLowerCase())) {
+
+                System.out.println("Emisora borrada");
+                this.emisoras.remove(i);
+                this.emisora = this.emisoras.get(0);
+            }
         }
     }
 

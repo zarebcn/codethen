@@ -26,7 +26,9 @@ public class EjerciciosObjetos {
 
 
         cdplayer.play(cd);
-        //cdplayer.quitCD();
+        cdplayer.quitCD();
+        radio.selectEmisora("Radio teletaxi");
+        radio.removeEmisora("radio teletaxi");
         System.out.println(radio.toString());
 
     }
