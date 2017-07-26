@@ -160,11 +160,11 @@ public class Radio {
 
         String mensaje = "";
 
-        if (this.isOn && !this.cdplayer.cdIn) {
+        if (this.isOn && this.cdplayer.getIsIn() == null) {
 
             mensaje = this.brand + ", Radio ON, CD Player OFF. Emitiendo: " + this.emisora + ", Volumen: " + this.volume;
 
-        } else if (this.isOn && this.cdplayer.cdIn) {
+        } else if (this.isOn && this.cdplayer.getIsIn() != null) {
 
             mensaje = this.brand + ", Radio OFF, CD Player ON. " + this.cdplayer.toString() + ", Volume: " + this.volume;
 

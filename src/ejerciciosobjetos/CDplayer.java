@@ -3,25 +3,28 @@ package ejerciciosobjetos;
 public class CDplayer {
 
 
-    public boolean cdIn;
     private CD cd;
 
     CDplayer() {
 
-        this.cdIn = false;
+        this.cd = null;
+    }
+
+    public CD getIsIn() {
+
+        return this.cd;
     }
 
     void quitCD() {
 
-        this.cdIn = false;
+        this.cd = null;
     }
 
     void play(CD cd) {
 
-        if (!this.cdIn) {
+        if (this.cd == null) {
 
             this.cd = cd;
-            this.cdIn = true;
         }
     }
 
@@ -29,7 +32,7 @@ public class CDplayer {
 
         String mensaje = "";
 
-        if (this.cdIn) {
+        if (this.cd != null) {
 
             mensaje = "Playing: " + this.cd.toString();
 
