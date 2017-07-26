@@ -11,7 +11,7 @@ public class Radio {
     private boolean isOn;
     private List<String> emisoras = new ArrayList<>();
     private String emisora;
-    private int i;
+    private int tunerPosition;
     private CDplayer cdplayer;
 
 
@@ -24,7 +24,7 @@ public class Radio {
         this.volume = 0;
         this.isOn = false;
         this.emisora = emisoras.get(0);
-        this.i = 0;
+        this.tunerPosition = 0;
         this.cdplayer = cdplayer;
     }
 
@@ -90,29 +90,29 @@ public class Radio {
 
     void tunerUp() {
 
-        i++;
+        tunerPosition++;
 
         if (this.isOn) {
 
-            if (i == emisoras.size()) {
+            if (tunerPosition == emisoras.size()) {
 
-                i = 0;
+                tunerPosition = 0;
             }
-            this.emisora = emisoras.get(i);
+            this.emisora = emisoras.get(tunerPosition);
         }
     }
 
     void tunerDown() {
 
-        i--;
+        tunerPosition--;
 
         if (this.isOn) {
 
-            if (i < 0) {
+            if (tunerPosition < 0) {
 
-                i = emisoras.size() - 1;
+                tunerPosition = emisoras.size() - 1;
             }
-            this.emisora = emisoras.get(i);
+            this.emisora = emisoras.get(tunerPosition);
         }
     }
 
