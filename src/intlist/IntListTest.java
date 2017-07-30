@@ -1,5 +1,8 @@
 package intlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This is a test for {@link IntList}.
  * We test different situations.
@@ -90,10 +93,10 @@ public class IntListTest {
         IntList2 list2 = new IntList2();
 
         list.add(new IntElement(5));
-        list.add(new IntElement(10));
-        list.add(new IntElement(15));
-        list.add(new IntElement(40));
-        list.remove(2);
+        //list.add(new IntElement(10));
+        //list.add(new IntElement(15));
+        //list.add(new IntElement(40));
+        list.remove(0);
 
         list2.add(5);
         list2.add(10);
@@ -101,8 +104,7 @@ public class IntListTest {
         list2.add(40);
         list2.remove(1);
 
-        assertEquals( list.get(2).getValue(), 40 );
-        assertEquals( list2.get(1), 15 );
+        assertEquals(list.get(0).getValue(), 5); //OutOfBounds
 
     }
 
