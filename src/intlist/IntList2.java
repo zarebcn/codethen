@@ -21,6 +21,10 @@ public class IntList2 {
             e = e.getNext();
         }
 
+        if (e == null && size == 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
         return e.getValue();
     }
 
@@ -73,17 +77,23 @@ public class IntList2 {
         IntElement anterior = first;
         IntElement posterior = first;
 
-        if (index < 0 || index >= size) {
+        if (index < 0 || (index > size - 1 && size > 0) || (index == size && index == 0 && e == null)) {
             throw new IndexOutOfBoundsException();
         }
 
+        /**
+         * para borrar el elemento de una lista de un solo elemento
+         */
         if (index == 0 && size == 1) {
             first = null;
             last = null;
             size--;
         }
 
-        if (index == 0) {
+        /**
+         * para borrar el primer elemento de una lista de varios elementos
+         */
+        if (index == 0 && size > 1) {
 
             first = e.getNext();
 
@@ -94,6 +104,9 @@ public class IntList2 {
             size--;
         }
 
+        /**
+         * para borrar el ultimo elemento de una lista de varios elementos
+         */
         if (index == size - 1) {
 
             for (int i = 0; i < size - 2; i++) {
@@ -104,7 +117,11 @@ public class IntList2 {
             size--;
         }
 
-        if (index != 0 && index != size - 1) {
+        /**
+         * para borrar un elemento que no sea ni el primero ni el ultimo en una lista
+         * de varios elementos
+         */
+        if (index != 0 && index != size - 1 && size != 0) {
 
             for (int i = 0; i < size; i++) {
 
@@ -120,6 +137,5 @@ public class IntList2 {
             e.setNext(posterior);
             size--;
         }
-
     }
 }
