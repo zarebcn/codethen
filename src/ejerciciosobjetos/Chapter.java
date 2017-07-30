@@ -6,6 +6,7 @@ public class Chapter {
     private String title;
     private int startPage;
     private int endPage;
+    private Chapter next;
 
     public String getTitle() {
         return title;
@@ -30,8 +31,16 @@ public class Chapter {
         this.endPage = endPage;
     }
 
+    public void setNext(Chapter next) {
+        this.next = next;
+    }
+
+    public Chapter getNext() {
+        return next;
+    }
+
     public String toString() {
 
-        return this.title + ": page " + this.startPage;
+        return title + ": page " + startPage;
     }
 }

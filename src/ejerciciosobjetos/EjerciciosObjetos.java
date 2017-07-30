@@ -46,12 +46,18 @@ public class EjerciciosObjetos {
         chapter3.setEndPage(65);
 
         Book book = new Book();
+        ChapterList chapterList = new ChapterList();
 
         book.setAuthor("Kathy Sierra");
         book.setTitle("Head First Java");
-        book.getChapters().add(chapter1);
-        book.getChapters().add(chapter2);
-        book.getChapters().add(chapter3);
+        //book.getChapters().add(chapter1);
+        //book.getChapters().add(chapter2);
+        //book.getChapters().add(chapter3);
+        chapterList.add(chapter1);
+        chapterList.add(chapter2);
+        chapterList.add(chapter3);
+        book.setChapters(chapterList);
+
 
         System.out.println(book.totalPages());
         System.out.println(book.toString());

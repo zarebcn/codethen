@@ -8,7 +8,8 @@ public class Book {
 
     private String author;
     private String title;
-    private List<Chapter> chapters = new ArrayList<>();
+    private ChapterList chapterList;
+   // private List<Chapter> chapterList = new ArrayList<>();
 
     public String getAuthor() {
         return author;
@@ -22,27 +23,33 @@ public class Book {
     public void setTitle(String title) {
         this.title = title;
     }
-    public List<Chapter> getChapters() {
-        return chapters;
+    public ChapterList getChapters() {
+        return chapterList;
     }
-    public void setChapters(List<Chapter> chapters) {
-        this.chapters = chapters;
+    public void setChapters(ChapterList chapterList) {
+        this.chapterList = chapterList;
     }
+    /*public List<Chapter> getChapters() {
+        return chapterList;
+    }
+    public void setChapters(List<Chapter> chapterList) {
+        this.chapters = chapterList;
+    }*/
 
     String totalPages() {
 
-        return "Total pages: " + this.chapters.get(this.chapters.size() - 1).getEndPage();
+        return "Total pages: " + chapterList.get(chapterList.size() - 1).getEndPage();
     }
 
     public String toString() {
 
         String info = "";
-        info = this.title + "\n";
-        info += "By " + this.author + "\n";
+        info = title + "\n";
+        info += "By " + author + "\n";
 
-        for (int i = 0; i < this.chapters.size(); i++) {
+        for (int i = 0; i < chapterList.size(); i++) {
 
-            info += i + 1 + " - " + this.chapters.get(i).toString() + "\n";
+            info += i + 1 + " - " + chapterList.get(i).toString() + "\n";
         }
 
         return info;
