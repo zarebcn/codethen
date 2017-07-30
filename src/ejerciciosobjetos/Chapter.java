@@ -8,27 +8,21 @@ public class Chapter {
     private int endPage;
     private Chapter next;
 
+    Chapter (String title, int startPage, int endPage) {
+        this.title = title;
+        this.startPage = startPage;
+        this.endPage = endPage;
+    }
     public String getTitle() {
         return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public int getStartPage() {
         return startPage;
     }
 
-    public void setStartPage(int startPage) {
-        this.startPage = startPage;
-    }
-
     public int getEndPage() {
         return endPage;
-    }
-
-    public void setEndPage(int endPage) {
-        this.endPage = endPage;
     }
 
     public void setNext(Chapter next) {

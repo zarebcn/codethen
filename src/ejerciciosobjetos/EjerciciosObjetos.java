@@ -31,19 +31,9 @@ public class EjerciciosObjetos {
         radio.removeEmisora("radio teletaxi");
         System.out.println(radio.toString());
 
-        Chapter chapter1 = new Chapter();
-        Chapter chapter2 = new Chapter();
-        Chapter chapter3 = new Chapter();
-
-        chapter1.setTitle("Breaking the Surface");
-        chapter1.setStartPage(1);
-        chapter1.setEndPage(26);
-        chapter2.setTitle("A Trip to Objectville");
-        chapter2.setStartPage(27);
-        chapter2.setEndPage(48);
-        chapter3.setTitle("Know Your Variables");
-        chapter3.setStartPage(49);
-        chapter3.setEndPage(65);
+        Chapter chapter1 = new Chapter("Breaking the Surface", 1, 26 );
+        Chapter chapter2 = new Chapter("A Trip to Objectville", 27, 48);
+        Chapter chapter3 = new Chapter("Know Your Variables", 49, 65);
 
         Book book = new Book();
         ChapterList chapterList = new ChapterList();
