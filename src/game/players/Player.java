@@ -19,7 +19,7 @@ public abstract class Player implements Entity {
     }
 
     public boolean isAlive() {
-        return this.health >= 0;
+        return this.health > 0;
     }
 
     public double getHealth() {

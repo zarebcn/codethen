@@ -9,7 +9,6 @@ public class Giant extends Player {
 
     public Giant() {
         random = new Random();
-        hasAttacked = false;
     }
 
     @Override

@@ -45,18 +45,29 @@ public class Game {
             int a1 = p1.attack();
             int a2 = p2.attack();
 
+            String a = p1 + " hits " + a1;
+            String b = p2 + " hits " + a2;
+            String c = ", ";
 
-            if (p2.getHealth() - a1 <= 0) {
+            p2.receiveHit(a1 * hasAttacked);
+
+            if (p2.getHealth() <= 0) {
                 a2 = 0;
-            } else if (p1.getHealth() - a2 <= 0) {
+                b = p2.getClass().getSimpleName() + " is dead";
+            }
+
+            p1.receiveHit(a2);
+
+            if (p1.getHealth() <= 0) {
                 a1 = 0;
+                a = "The Knight is dead";
+                b = "";
+                c = "";
             }
 
 
-            System.out.println(p1 + " hits " + a1 + ", " + p2 + " hits " + a2);
+            System.out.println(a + c + b);
 
-            p1.receiveHit(a2);
-            p2.receiveHit(a1 * hasAttacked);
 
            if (p2.giantHasAttacked()) {
                 hasAttacked = 4;

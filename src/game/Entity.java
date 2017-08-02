@@ -20,7 +20,7 @@ public interface Entity {
     int attack();
 
     /** Receives the hit from another entity */
-     void receiveHit(double hit);
+    void receiveHit(double hit);
 
     boolean giantHasAttacked();
 }
