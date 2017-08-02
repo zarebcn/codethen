@@ -1,35 +1,30 @@
 package bookprinter;
 
-
 import java.util.List;
 
-public class HtmlBookPrinter implements BookPrinter {
+public class MarkdownBookPrinter implements BookPrinter {
 
     @Override
     public String getFormat() {
-        return "HTML";
+        return "MARKDOWN";
     }
 
     @Override
     public String bookToString(Book book) {
 
-
         String title = book.getTitle();
         String author = book.getAuthor();
         List<Chapter> chapters = book.getChapters();
-        String html = "";
+        String markdown = "";
         String saltoLinea = "\n";
 
-        html = "<h1>" + title + "</h1>" + saltoLinea;
-        html += "<h2>" + author + "</h2>" + saltoLinea;
-        html += "<ol>" + saltoLinea;
+        markdown = "# " + title + saltoLinea;
+        markdown += "## " + author + saltoLinea;
 
         for (int i = 0; i < chapters.size(); i++) {
-            html += "<li>" + chapters.get(i) + "</li>" + saltoLinea;
+            markdown += (i + 1) + ". " + chapters.get(i) + saltoLinea;
         }
 
-        html += "</ol>" + saltoLinea;
-
-        return html;
+        return markdown;
     }
 }
