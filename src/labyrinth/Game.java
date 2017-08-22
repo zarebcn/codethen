@@ -53,6 +53,7 @@ public class Game {
                 System.out.println();
                 System.out.println("Bravo!! Has conseguido salir del laberinto");
                 exit = true;
+                scanner.close();
             }
 
         }
