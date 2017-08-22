@@ -5,17 +5,22 @@ import java.util.Scanner;
 
 public class Game {
 
-   //private Labyrinth labyrinth;
     private int posicionVertical;
     private int posicionHorizontal;
     private List<String> lista;
+    private int keyLocVertical;
+    private int keyLocHorizontal;
+    private boolean llave;
 
-    Game (Labyrinth labyrinth) {
+    Game (Labyrinth labyrinth, Key key) {
 
         //this.labyrinth = labyrinth;
-        posicionVertical = labyrinth.getLabyrinth().size() - 2;
-        posicionHorizontal = labyrinth.getStartingPoint();
+        posicionVertical = labyrinth.getStartingPointVertical();
+        posicionHorizontal = labyrinth.getStartingPointHorizontal();
+        keyLocVertical = key.getPosicionVertical();
+        keyLocHorizontal = key.getPosicionHorizontal();
         lista = labyrinth.getLabyrinth();
+        llave = false;
     }
 
     public void start() {
@@ -24,6 +29,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         String muroActual = lista.get(posicionVertical);
         boolean exit = false;
+
 
         System.out.println("Bienvenido al laberinto, trata de salir de el. Suerte...");
 
@@ -35,25 +41,36 @@ public class Game {
         String direccion = scanner.next();
 
         String muroActualizado = actualizarMapa(direccion, muroActual);
-        mostrarMapa(posicionVertical, muroActualizado);
+        System.out.println(mostrarMapa(posicionVertical, muroActualizado));
 
         while (!exit) {
 
-            System.out.println();
             System.out.println("Hacia donde quieres ir (norte, sur, este, oeste) ?");
 
             direccion = scanner.next();
 
             muroActualizado = actualizarMapa(direccion, muroActualizado);
 
-            mostrarMapa(posicionVertical, muroActualizado);
+            System.out.println(mostrarMapa(posicionVertical, muroActualizado));
 
-            if (posicionVertical == 0 && posicionHorizontal == 1) {
+            if (posicionVertical == keyLocVertical && posicionHorizontal == keyLocHorizontal) {
+
+                System.out.println("Has encontrado la llave, ahora dirigete hacia la salida");
+                System.out.println();
+                llave = true;
+            }
+
+            if (posicionVertical == 0 && posicionHorizontal == 1 && llave) {
 
                 System.out.println();
                 System.out.println("Bravo!! Has conseguido salir del laberinto");
                 exit = true;
                 scanner.close();
+
+            } else if (posicionVertical == 0 && posicionHorizontal == 1 && !llave) {
+
+                System.out.println("Necesitas una llave para salir");
+                System.out.println();
             }
 
         }
@@ -71,6 +88,7 @@ public class Game {
 
                 muroActualizado = muroActual.substring(0, posicionHorizontal -1) + "o" + " " + muroActual.substring(posicionHorizontal + 1, muroActual.length());
                 posicionHorizontal--;
+
             } else {
 
                 System.out.println("No puedes ir al oeste");
@@ -86,6 +104,7 @@ public class Game {
 
                 muroActualizado = muroActual.substring(0, posicionHorizontal) + " " + "o" + muroActual.substring(posicionHorizontal + 2, muroActual.length());
                 posicionHorizontal++;
+
             } else {
 
                 System.out.println("No puedes ir al este");
@@ -96,6 +115,12 @@ public class Game {
         if (direccion.equals("norte")) {
 
             muroActual = lista.get(posicionVertical);
+
+            if (posicionVertical == 0 && posicionHorizontal== 1 && !llave) {
+
+                return muroActual.substring(0, posicionHorizontal) + "o" + muroActual.substring(posicionHorizontal + 1, muroActual.length());
+            }
+
             String muroArriba = lista.get(posicionVertical - 1);
             String norte = muroArriba.substring(posicionHorizontal, posicionHorizontal + 1);
 
@@ -103,6 +128,7 @@ public class Game {
 
                 muroActualizado = muroArriba.substring(0, posicionHorizontal) + "o" + muroArriba.substring(posicionHorizontal + 1, muroArriba.length());
                 posicionVertical--;
+
             } else {
 
                 System.out.println("No puedes ir al norte");
@@ -120,6 +146,7 @@ public class Game {
 
                 muroActualizado = muroAbajo.substring(0, posicionHorizontal) + "o" + muroAbajo.substring(posicionHorizontal + 1, muroAbajo.length());
                 posicionVertical++;
+
             } else {
 
                 System.out.println("No puedes ir al sur");
@@ -130,17 +157,20 @@ public class Game {
         return muroActualizado;
     }
 
-    public void mostrarMapa(int posicionVertical, String muroActual) {
+    public String mostrarMapa(int posicionVertical, String muroActual) {
 
         if (posicionVertical == 0) {
 
-            System.out.println();
-            System.out.println(muroActual + "\n" + lista.get(posicionVertical + 1) + "\n");
+            //System.out.println();
+            //System.out.println(muroActual + "\n" + lista.get(posicionVertical + 1) + "\n");
+            return "\n" + muroActual + "\n" + lista.get(posicionVertical + 1) + "\n";
 
         } else {
 
-            System.out.println();
-            System.out.println(lista.get(posicionVertical - 1) + "\n" + muroActual + "\n" + lista.get(posicionVertical + 1) + "\n");
+            //System.out.println();
+            //System.out.println(lista.get(posicionVertical - 1) + "\n" + muroActual + "\n" + lista.get(posicionVertical + 1) + "\n");
+            return "\n" + lista.get(posicionVertical - 1) + "\n" + muroActual + "\n" + lista.get(posicionVertical + 1) + "\n";
         }
     }
+
 }

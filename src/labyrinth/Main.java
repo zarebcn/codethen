@@ -22,8 +22,9 @@ public class Main {
         labyrinth.add(muro5);
         labyrinth.add(muro6);
 
-        Labyrinth laberinto = new Labyrinth(labyrinth, 4);
-        Game game = new Game(laberinto);
+        Labyrinth laberinto = new Labyrinth(labyrinth, 4, 4);
+        Key key = new Key(1, 4);
+        Game game = new Game(laberinto, key);
 
         game.start();
 
