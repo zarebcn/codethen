@@ -27,7 +27,7 @@ public class Game {
 
 
         Scanner scanner = new Scanner(System.in);
-        String muroActual = lista.get(posicionVertical);
+        String zonaActual = lista.get(posicionVertical);
         boolean exit = false;
 
 
@@ -40,8 +40,8 @@ public class Game {
 
         String direccion = scanner.next();
 
-        String muroActualizado = actualizarMapa(direccion, muroActual);
-        System.out.println(mostrarMapa(posicionVertical, muroActualizado));
+        String zonaActualizada = actualizarMapa(direccion, zonaActual);
+        System.out.println(mostrarMapa(posicionVertical, zonaActualizada));
 
         while (!exit) {
 
@@ -49,15 +49,16 @@ public class Game {
 
             direccion = scanner.next();
 
-            muroActualizado = actualizarMapa(direccion, muroActualizado);
+            zonaActualizada = actualizarMapa(direccion, zonaActualizada);
 
-            System.out.println(mostrarMapa(posicionVertical, muroActualizado));
+            System.out.println(mostrarMapa(posicionVertical, zonaActualizada));
 
-            if (posicionVertical == keyLocVertical && posicionHorizontal == keyLocHorizontal) {
+            if (posicionVertical == keyLocVertical && posicionHorizontal == keyLocHorizontal && !llave) {
 
                 System.out.println("Has encontrado la llave, ahora dirigete hacia la salida");
                 System.out.println();
                 llave = true;
+
             }
 
             if (posicionVertical == 0 && posicionHorizontal == 1 && llave) {
@@ -76,49 +77,49 @@ public class Game {
         }
     }
 
-    public String actualizarMapa(String direccion, String muroActual) {
+    public String actualizarMapa(String direccion, String zonaActual) {
 
         String muroActualizado = "";
 
         if (direccion.equals("oeste")) {
 
-            String oeste = muroActual.substring(posicionHorizontal - 1, posicionHorizontal);
+            String oeste = zonaActual.substring(posicionHorizontal - 1, posicionHorizontal);
 
             if (!oeste.equals("X")) {
 
-                muroActualizado = muroActual.substring(0, posicionHorizontal -1) + "o" + " " + muroActual.substring(posicionHorizontal + 1, muroActual.length());
+                muroActualizado = zonaActual.substring(0, posicionHorizontal -1) + "o" + " " + zonaActual.substring(posicionHorizontal + 1, zonaActual.length());
                 posicionHorizontal--;
 
             } else {
 
                 System.out.println("No puedes ir al oeste");
-                muroActualizado = muroActual.substring(0, posicionHorizontal) + "o" + muroActual.substring(posicionHorizontal + 1, muroActual.length());
+                muroActualizado = zonaActual.substring(0, posicionHorizontal) + "o" + zonaActual.substring(posicionHorizontal + 1, zonaActual.length());
             }
         }
 
         if (direccion.equals("este")) {
 
-            String este = muroActual.substring(posicionHorizontal + 1, posicionHorizontal + 2);
+            String este = zonaActual.substring(posicionHorizontal + 1, posicionHorizontal + 2);
 
             if (!este.equals("X")) {
 
-                muroActualizado = muroActual.substring(0, posicionHorizontal) + " " + "o" + muroActual.substring(posicionHorizontal + 2, muroActual.length());
+                muroActualizado = zonaActual.substring(0, posicionHorizontal) + " " + "o" + zonaActual.substring(posicionHorizontal + 2, zonaActual.length());
                 posicionHorizontal++;
 
             } else {
 
                 System.out.println("No puedes ir al este");
-                muroActualizado = muroActual.substring(0, posicionHorizontal) + "o" + muroActual.substring(posicionHorizontal + 1, muroActual.length());
+                muroActualizado = zonaActual.substring(0, posicionHorizontal) + "o" + zonaActual.substring(posicionHorizontal + 1, zonaActual.length());
             }
         }
 
         if (direccion.equals("norte")) {
 
-            muroActual = lista.get(posicionVertical);
+            zonaActual = lista.get(posicionVertical);
 
             if (posicionVertical == 0 && posicionHorizontal== 1 && !llave) {
 
-                return muroActual.substring(0, posicionHorizontal) + "o" + muroActual.substring(posicionHorizontal + 1, muroActual.length());
+                return zonaActual.substring(0, posicionHorizontal) + "o" + zonaActual.substring(posicionHorizontal + 1, zonaActual.length());
             }
 
             String muroArriba = lista.get(posicionVertical - 1);
@@ -132,13 +133,13 @@ public class Game {
             } else {
 
                 System.out.println("No puedes ir al norte");
-                muroActualizado = muroActual.substring(0, posicionHorizontal) + "o" + muroActual.substring(posicionHorizontal + 1, muroActual.length());
+                muroActualizado = zonaActual.substring(0, posicionHorizontal) + "o" + zonaActual.substring(posicionHorizontal + 1, zonaActual.length());
             }
         }
 
         if (direccion.equals("sur")) {
 
-            muroActual = lista.get(posicionVertical);
+            zonaActual = lista.get(posicionVertical);
             String muroAbajo = lista.get(posicionVertical + 1);
             String sur = muroAbajo.substring(posicionHorizontal, posicionHorizontal + 1);
 
@@ -150,26 +151,26 @@ public class Game {
             } else {
 
                 System.out.println("No puedes ir al sur");
-                muroActualizado = muroActual.substring(0, posicionHorizontal) + "o" + muroActual.substring(posicionHorizontal + 1, muroActual.length());
+                muroActualizado = zonaActual.substring(0, posicionHorizontal) + "o" + zonaActual.substring(posicionHorizontal + 1, zonaActual.length());
             }
         }
 
         return muroActualizado;
     }
 
-    public String mostrarMapa(int posicionVertical, String muroActual) {
+    public String mostrarMapa(int posicionVertical, String zonaActualizada) {
 
         if (posicionVertical == 0) {
 
             //System.out.println();
             //System.out.println(muroActual + "\n" + lista.get(posicionVertical + 1) + "\n");
-            return "\n" + muroActual + "\n" + lista.get(posicionVertical + 1) + "\n";
+            return "\n" + zonaActualizada + "\n" + lista.get(posicionVertical + 1) + "\n";
 
         } else {
 
             //System.out.println();
             //System.out.println(lista.get(posicionVertical - 1) + "\n" + muroActual + "\n" + lista.get(posicionVertical + 1) + "\n");
-            return "\n" + lista.get(posicionVertical - 1) + "\n" + muroActual + "\n" + lista.get(posicionVertical + 1) + "\n";
+            return "\n" + lista.get(posicionVertical - 1) + "\n" + zonaActualizada + "\n" + lista.get(posicionVertical + 1) + "\n";
         }
     }
 
