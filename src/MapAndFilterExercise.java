@@ -25,6 +25,51 @@ public class MapAndFilterExercise {
         System.out.println("fechas (modificadas): " + modifiedDates2);
 
 
+        // map usando una lista de Dates
+        Date date = new Date();
+        Date date2 = new Date();
+        Date date3 = new Date();
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.YEAR, 2017);
+        calendar.set(Calendar.DAY_OF_MONTH, 25);
+        calendar.set(Calendar.MONTH, 2);
+        Date modifiedDate = calendar.getTime(); //25-03-2017
+
+        calendar.setTime(date2);
+        calendar.set(Calendar.YEAR, 2016);
+        calendar.set(Calendar.DAY_OF_MONTH, 10);
+        calendar.set(Calendar.MONTH, 1);
+        Date modifiedDate2 = calendar.getTime(); //10-2-2016
+
+        calendar.setTime(date3);
+        calendar.set(Calendar.YEAR, 2010);
+        calendar.set(Calendar.DAY_OF_MONTH, 15);
+        calendar.set(Calendar.MONTH, 10);
+        Date modifiedDate3 = calendar.getTime(); //15-11-2010
+
+        List<Date> dates2 = Arrays.asList(modifiedDate, modifiedDate2, modifiedDate3);
+
+        List<Date> modifiedDates3 = map(dates2, new genericMapFunction<Date, Date>() {
+            @Override
+            public Date apply(Date date) {
+
+                calendar.setTime(date);
+                calendar.add(Calendar.MONTH, 1);
+                return calendar.getTime();
+            }
+        });
+
+        List<Date> modifiedDates4 = map(dates2, fecha -> addMonthsToDate(fecha, calendar));
+
+        System.out.println("Dates: " + printDates(dates2, dateFormat));
+        System.out.println("Dates (modified): " + printDates(modifiedDates3, dateFormat));
+        System.out.println("Dates (modified): " + printDates(modifiedDates4, dateFormat));
+
+        // filter
         List<String> text = Arrays.asList("barca", "casa", "perro", "bolsa", "burro", "agua", "coche");
 
         System.out.println("palabras: " + text);
@@ -68,12 +113,16 @@ public class MapAndFilterExercise {
 
         System.out.println("numeros: " + numbers);
         System.out.println("numeros (pares): " + numbers2);
-
     }
 
     @FunctionalInterface
     interface StringFunction {
         String apply(String arg) throws ParseException;
+    }
+
+    @FunctionalInterface
+    interface genericMapFunction<Arg, Return> {
+        Return apply(Arg arg);
     }
 
     @FunctionalInterface
@@ -97,6 +146,18 @@ public class MapAndFilterExercise {
 
         for (String elem : list) {
             String modified = f.apply(elem);
+            result.add(modified);
+        }
+
+        return result;
+    }
+
+    static <In, Out> List<Out> map(List<In> list, genericMapFunction<In, Out> f) {
+
+        List<Out> result = new ArrayList<>();
+
+        for (In elem : list) {
+            Out modified = f.apply(elem);
             result.add(modified);
         }
 
@@ -127,7 +188,6 @@ public class MapAndFilterExercise {
         }
 
         return result;
-
     }
 
     static String addMonths(String date, int amount) throws ParseException {
@@ -140,5 +200,30 @@ public class MapAndFilterExercise {
         Date fechaModificada = calendar.getTime();
 
         return dateFormat.format(fechaModificada);
+    }
+
+    static String printDates(List<Date> dates, DateFormat dateFormat) {
+
+        String fechas = "";
+
+        for (int i = 0; i < dates.size(); i++) {
+
+            Date fecha = dates.get(i);
+            fechas += dateFormat.format(fecha);
+
+            if (i < dates.size() - 1) {
+
+                fechas += ", ";
+            }
+        }
+
+        return fechas;
+    }
+
+    static Date addMonthsToDate(Date date, Calendar calendar) {
+
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, 1);
+        return calendar.getTime();
     }
 }
