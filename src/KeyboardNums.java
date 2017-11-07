@@ -177,5 +177,5 @@ class Result {
 
             return this.error;
         }
-    }
+   }
 }
