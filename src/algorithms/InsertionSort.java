@@ -14,7 +14,7 @@ public class InsertionSort {
         }
     }
 
-    static void insertionSort (int[] lista) {
+    private static void insertionSort (int[] lista) {
 
 
         for (int i = 1; i < lista.length; i++) {
