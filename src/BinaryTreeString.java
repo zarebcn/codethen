@@ -9,6 +9,7 @@ public class BinaryTreeString {
         TreeNode javi = new TreeNode("Javi", ferran, kris);
 
         System.out.println(printSortedStrings(javi));
+
         System.out.println(contains(javi, "bernat"));
         System.out.println(contains(javi, "jose"));
 
