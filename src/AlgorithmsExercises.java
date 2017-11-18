@@ -22,7 +22,8 @@ public class AlgorithmsExercises {
     }
 
     // Finds the maximum number of the List by iterating it and comparing number by number
-    // a fast method is sorting the List and picking the last number of the List
+    // a fast method is sorting the List and picking the last number of the List.
+    // Returns the maximum number.
     private static int findTheMaximum (List<Integer> list) {
 
         int max = 0;
@@ -42,7 +43,8 @@ public class AlgorithmsExercises {
     }
 
     // Finds the 2 numbers with the minimum difference between them by sorting the List and
-    // iterating the List comparing the difference between consecutive couples of numbers
+    // iterating the List comparing the difference between consecutive couples of numbers.
+    // Returns a String with the 2 numbers with the minimum difference between them.
     private static String minimumDifference (List<Integer> list) {
 
         Collections.sort(list);
