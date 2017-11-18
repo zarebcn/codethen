@@ -10,7 +10,7 @@ public class BinaryTreeString {
 
         System.out.println(printSortedStrings(javi));
 
-        System.out.println(contains(javi, "bernat"));
+        System.out.println(contains(javi, "Bernat"));
         System.out.println(contains(javi, "jose"));
 
     }
@@ -43,17 +43,22 @@ public class BinaryTreeString {
 
         if (treeNode != null) {
 
-            if (treeNode.value.toString().toLowerCase().equals(value.toLowerCase())) {
+            if (treeNode.value.toString().equals(value)) {
 
                 return true;
 
             } else {
 
-                containsNode = contains(treeNode.left, value);
+                if (value.compareTo(treeNode.value.toString()) < 0) {
 
-                if (!containsNode) {
+                    containsNode = contains(treeNode.left, value);
+
+                }
+
+                if (value.compareTo(treeNode.value.toString()) > 0) {
 
                     containsNode = contains(treeNode.right, value);
+
                 }
 
                 return containsNode;
