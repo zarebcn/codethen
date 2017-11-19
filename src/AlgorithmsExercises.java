@@ -14,10 +14,11 @@ public class AlgorithmsExercises {
 
         Person p1 = new Person("Peter", 20, "NY");
         Person p2 = new Person("Mary", 30, "London");
-        Person p3 = new Person("Peter", 20, "BCN");
+        Person p3 = new Person("Peter", 10, "BCN");
 
         List<Person> list2 = new ArrayList<>(Arrays.asList(p1, p2, p3));
         System.out.println(findRepeatedPerson(list2));
+        System.out.println(findRepeatedPerson2(list2));
 
     }
 
@@ -79,9 +80,30 @@ public class AlgorithmsExercises {
             this.age = age;
             this.city = city;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+
+            if (obj instanceof Person) {
+
+                Person p = (Person)obj;
+
+                return this.name.equals(p.name) && this.age == p.age;
+
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public int hashCode() {
+
+            return age * this.name.length();
+        }
     }
 
-
+    // Finds if theres a Person repeated in a List considering repeated if name and age is the same.
+    // This method costs n^2.
     private static boolean findRepeatedPerson (List<Person> list) {
 
         for (int i = 0; i < list.size() - 1; i++) {
@@ -94,6 +116,24 @@ public class AlgorithmsExercises {
                 if (a.name.equals(b.name) && (a.age == b.age)) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    // Does the same as the method above but improves the cost to O(n).
+    private static boolean findRepeatedPerson2 (List<Person> list) {
+
+        HashSet<Person> personas = new HashSet<>();
+        boolean result;
+
+        for (Person p : list) {
+
+            result = personas.add(p);
+
+            if (!result) {
+
+                return true;
             }
         }
         return false;
