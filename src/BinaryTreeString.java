@@ -66,7 +66,7 @@ public class BinaryTreeString {
 
         } else {
 
-            return containsNode;
+            return false;
         }
     }
 
