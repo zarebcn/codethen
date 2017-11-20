@@ -14,7 +14,7 @@ public class AlgorithmsExercises {
 
         Person p1 = new Person("Peter", 20, "NY");
         Person p2 = new Person("Mary", 30, "London");
-        Person p3 = new Person("Peter", 10, "BCN");
+        Person p3 = new Person("Peter", 20, "BCN");
 
         List<Person> list2 = new ArrayList<>(Arrays.asList(p1, p2, p3));
         System.out.println(findRepeatedPerson(list2));
@@ -98,7 +98,7 @@ public class AlgorithmsExercises {
         @Override
         public int hashCode() {
 
-            return age * this.name.length();
+            return Objects.hash(age, name);
         }
     }
 
@@ -113,7 +113,7 @@ public class AlgorithmsExercises {
                 Person a = list.get(i);
                 Person b = list.get(j);
 
-                if (a.name.equals(b.name) && (a.age == b.age)) {
+                if (a.equals(b)) {
                     return true;
                 }
             }
